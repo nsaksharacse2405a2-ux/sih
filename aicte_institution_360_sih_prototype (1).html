@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AICTE Institution 360° - Inter-Bureau Complaint Monitoring & AI Intelligence Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            700: '#1b365d',
+                            800: '#0f2942',
+                            900: '#0b1d3a',
+                        },
+                        aicte: {
+                            blue: '#0056b3',
+                            orange: '#ff6b00',
+                            teal: '#00a896',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        html { scroll-behavior: smooth; }
+        .landing-grid { background-image: radial-gradient(#cbd5e1 0.7px, transparent 0.7px); background-size: 18px 18px; }
+        .relationship-line { background: linear-gradient(90deg, #60a5fa, #22d3ee); background-size: 200% 100%; animation: line-flow 4s ease-in-out infinite; }
+        @keyframes line-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <div id="landing-page">
+        <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+            <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-3 sm:gap-5 sm:px-5 lg:px-8">
+                <a href="#home" class="flex shrink-0 items-center gap-3" aria-label="Institution 360 home">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-900 text-sm font-black tracking-tight text-white shadow-sm">360<span class="text-cyan-300">°</span></span>
+                    <span><span class="block text-sm font-bold tracking-tight text-slate-900">Institution 360°</span><span class="block text-[10px] font-medium uppercase tracking-[.14em] text-slate-500">Institution Monitoring System</span></span>
+                </a>
+                <div class="hidden items-center gap-7 text-xs font-semibold text-slate-600 lg:flex">
+                    <a class="hover:text-blue-700" href="#home">Home</a><a class="hover:text-blue-700" href="#modules">Modules</a><a class="hover:text-blue-700" href="#institutions">Institutions</a><a class="hover:text-blue-700" href="#intelligence">Complaint Intelligence</a><a class="hover:text-blue-700" href="#coordination">Coordination</a><a class="hover:text-blue-700" href="#analytics">Analytics</a>
+                </div>
+                <button onclick="showPlatform('overview')" class="whitespace-nowrap rounded-lg bg-blue-700 px-2 py-2.5 text-[10px] font-bold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:px-4 sm:text-xs">Officer Login <span class="hidden sm:inline" aria-hidden="true">→</span></button>
+            </nav>
+        </header>
+
+        <main id="home" class="scroll-mt-20">
+            <section class="relative overflow-hidden bg-[#f6f9fc]">
+                <div class="pointer-events-none absolute inset-0 landing-grid opacity-40"></div>
+                <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[.94fr_1.06fr] lg:px-8 lg:py-24">
+                    <div class="max-w-xl">
+                        <h1 class="text-4xl font-bold leading-[1.12] tracking-tight text-[#102743] sm:text-5xl lg:text-[3.65rem]">One Institution.<br>Every Complaint.<br><span class="text-blue-700">Complete Visibility.</span></h1>
+                        <p class="mt-6 max-w-lg text-sm leading-7 text-slate-600 sm:text-base">An AI-powered institutional intelligence platform connecting complaint records across bureaus, detecting related issues, and enabling coordinated action through a unified monitoring system.</p>
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <button onclick="showPlatform('overview')" class="rounded-lg bg-blue-700 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-blue-900/15 transition hover:-translate-y-0.5 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Explore Platform <span aria-hidden="true">↗</span></button>
+                            <button onclick="showPlatform('review-queue')" class="rounded-lg border border-slate-300 bg-white px-5 py-3 text-xs font-bold text-slate-800 transition hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Complaint Intelligence</button>
+                        </div>
+                        <div class="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-[11px] font-semibold text-slate-600">
+                            <span class="inline-flex items-center gap-2"><span class="text-emerald-600">✓</span> Unified Complaint Intelligence</span><span class="inline-flex items-center gap-2"><span class="text-emerald-600">✓</span> Cross-Bureau Coordination</span><span class="inline-flex items-center gap-2"><span class="text-emerald-600">✓</span> Explainable AI Insights</span>
+                        </div>
+                        <p class="mt-5 text-[10px] leading-5 text-slate-500">Illustrative fictional data only. This prototype is not an official AICTE service unless formally authorized.</p>
+                    </div>
+
+                    <div class="relative mx-auto w-full max-w-[610px]" aria-label="Illustrative complaint intelligence dashboard">
+                        <div class="absolute inset-0 rounded-[2rem] bg-blue-100/70 blur-2xl"></div>
+                        <div class="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_24px_70px_-30px_rgba(15,41,66,.38)] sm:p-5">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                                <div class="flex items-center gap-3"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-700">⌂</span><div><p class="text-xs font-bold text-slate-900">ABC Engineering College</p><p class="mt-0.5 text-[10px] text-slate-500">PID-1001 · Fictional demo institution</p></div></div>
+                                <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-[9px] font-bold text-emerald-700">MONITORING</span>
+                            </div>
+                            <div class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                                <div class="rounded-lg bg-slate-50 p-2.5"><p class="text-[9px] text-slate-500">Complaints</p><p class="mt-1 text-lg font-bold text-slate-900">03</p></div><div class="rounded-lg bg-blue-50/70 p-2.5"><p class="text-[9px] text-slate-500">Related cases</p><p class="mt-1 text-lg font-bold text-blue-800">02</p></div><div class="rounded-lg bg-amber-50 p-2.5"><p class="text-[9px] text-slate-500">Pending actions</p><p class="mt-1 text-lg font-bold text-amber-700">02</p></div><div class="rounded-lg bg-rose-50 p-2.5"><p class="text-[9px] text-slate-500">Next deadline</p><p class="mt-1 text-sm font-bold text-rose-700">28 Oct</p></div>
+                            </div>
+                            <div class="relative mt-4 rounded-xl border border-slate-100 bg-[#f8fafc] p-4">
+                                <div class="mb-2 flex items-center justify-between"><p class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Institution relationship map</p><span class="text-[9px] text-slate-400">DEMO VIEW</span></div>
+                                <div class="grid grid-cols-[1fr_34px_1fr] items-center gap-2">
+                                    <div class="space-y-3">
+                                        <div class="rounded-lg border border-blue-100 bg-white p-2.5 shadow-sm"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-800">PGRC-101</span><span class="rounded bg-blue-50 px-1.5 py-0.5 text-[8px] font-bold text-blue-700">PGRC</span></div><p class="mt-1 text-[9px] text-slate-500">Laboratory facilities</p></div>
+                                        <div class="rounded-lg border border-teal-100 bg-white p-2.5 shadow-sm"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-800">RB-205</span><span class="rounded bg-teal-50 px-1.5 py-0.5 text-[8px] font-bold text-teal-700">REGIONAL BUREAU</span></div><p class="mt-1 text-[9px] text-slate-500">Infrastructure compliance</p></div>
+                                    </div>
+                                    <div class="flex h-full flex-col items-center justify-center gap-1"><span class="h-2 w-2 rounded-full bg-blue-600 ring-4 ring-blue-100"></span><span class="relationship-line h-16 w-0.5 rounded-full"></span><span class="h-2 w-2 rounded-full bg-teal-600 ring-4 ring-teal-100"></span></div>
+                                    <div class="rounded-xl border border-slate-200 bg-white p-3 text-center shadow-sm"><span class="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-navy-900 text-[9px] font-bold text-white">PID</span><p class="mt-2 text-[9px] font-bold text-slate-800">ABC Engineering</p><p class="mt-0.5 text-[8px] text-slate-500">Shared institution</p><span class="mt-2 inline-block rounded-full bg-slate-100 px-2 py-1 text-[8px] font-bold text-slate-600">PID-1001</span></div>
+                                </div>
+                                <div class="mt-3 flex items-start gap-2 rounded-lg border border-cyan-100 bg-cyan-50/70 p-2.5"><span class="text-cyan-700">✦</span><p class="text-[9px] leading-4 text-slate-700"><strong>AI insight · 82% similarity</strong><br>Both fictional complaints mention laboratory equipment deficiencies. Review suggested link before action.</p></div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between gap-3 rounded-lg bg-navy-900 px-3 py-2.5 text-[9px] text-slate-200"><span><span class="mr-1.5 text-emerald-400">●</span> Records synchronized across bureaus</span><span class="text-slate-400">2 officer updates · 10:42</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="modules" class="border-y border-slate-200 bg-white py-14 sm:py-16">
+                <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                    <div class="mx-auto max-w-2xl text-center">
+                        <p class="text-[10px] font-bold uppercase tracking-[.18em] text-blue-700">Two connected workspaces</p>
+                        <h2 class="mt-3 text-3xl font-bold tracking-tight text-[#102743]">Choose a Module</h2>
+                        <p class="mt-3 text-sm leading-6 text-slate-600">Open the institution-by-bureau view or the oversight workspace from one landing page.</p>
+                    </div>
+                    <div class="mx-auto mt-8 grid max-w-5xl gap-5 md:grid-cols-2">
+                        <article class="flex flex-col rounded-2xl border border-slate-200 bg-[#f8fafc] p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
+                            <div class="flex items-start justify-between gap-4">
+                                <div><span class="inline-flex rounded-md bg-blue-100 px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-blue-800">Module 01</span><h3 class="mt-4 text-lg font-bold text-slate-900">Institution by Bureau</h3></div>
+                                <span aria-hidden="true" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-xl text-blue-700 shadow-sm">⌂</span>
+                            </div>
+                            <p class="mt-3 flex-1 text-xs leading-6 text-slate-600">Find an institution by Permanent ID, review its complaints across PGRC and Regional Bureau, and open its 360° profile.</p>
+                            <button onclick="showPlatform('directory')" class="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-4 py-3 text-xs font-bold text-white transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Open Institution Module <span aria-hidden="true">→</span></button>
+                        </article>
+                        <article class="flex flex-col rounded-2xl border border-slate-200 bg-[#f8fafc] p-6 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg">
+                            <div class="flex items-start justify-between gap-4">
+                                <div><span class="inline-flex rounded-md bg-emerald-100 px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-emerald-800">Module 02</span><h3 class="mt-4 text-lg font-bold text-slate-900">Authorization &amp; Oversight</h3></div>
+                                <span aria-hidden="true" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-xl text-emerald-700 shadow-sm">✓</span>
+                            </div>
+                            <p class="mt-3 flex-1 text-xs leading-6 text-slate-600">Review system activity and oversight records. The in-app role selector is for demonstration only; this prototype does not verify a person's identity or authority.</p>
+                            <button onclick="showPlatform('audit')" class="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-[#123251] px-4 py-3 text-xs font-bold text-white transition hover:bg-[#0b1d3a] focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Open Oversight Module <span aria-hidden="true">→</span></button>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="institutions" class="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
+                <div class="mx-auto max-w-2xl text-center"><p class="text-[10px] font-bold uppercase tracking-[.18em] text-blue-700">A connected view of institutional issues</p><h2 class="mt-3 text-3xl font-bold tracking-tight text-[#102743] sm:text-4xl">From Fragmented Complaints to Connected Intelligence</h2><p class="mt-4 text-sm leading-6 text-slate-600">Bring authorized records together, make potential relationships understandable, and support accountable follow-through.</p></div>
+                <div id="intelligence" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"><span class="text-xl text-blue-700">▤</span><h3 class="mt-4 text-sm font-bold text-slate-900">Unified Complaint Records</h3><p class="mt-2 text-xs leading-5 text-slate-600">Bring authorized complaint records from multiple bureaus into one centralized view.</p></article>
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"><span class="text-xl text-blue-700">⌘</span><h3 class="mt-4 text-sm font-bold text-slate-900">AI Relationship Detection</h3><p class="mt-2 text-xs leading-5 text-slate-600">Identify potentially related complaints using institution IDs and semantic similarity.</p></article>
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"><span class="text-xl text-cyan-700">◎</span><h3 class="mt-4 text-sm font-bold text-slate-900">Explainable Relationship Maps</h3><p class="mt-2 text-xs leading-5 text-slate-600">Visualize complaint connections and show why AI suggested each relationship.</p></article>
+                    <article id="coordination" class="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"><span class="text-xl text-emerald-700">☷</span><h3 class="mt-4 text-sm font-bold text-slate-900">Cross-Bureau Coordination</h3><p class="mt-2 text-xs leading-5 text-slate-600">Enable authorized officers to communicate in complaint-linked chat workspaces.</p></article>
+                    <article class="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"><span class="text-xl text-amber-600">◷</span><h3 class="mt-4 text-sm font-bold text-slate-900">Action &amp; Deadline Tracking</h3><p class="mt-2 text-xs leading-5 text-slate-600">Assign responsibilities, monitor progress, and flag approaching deadlines.</p></article>
+                </div>
+            </section>
+
+            <section class="border-y border-slate-200 bg-[#f6f9fc] py-16">
+                <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                    <div class="text-center"><p class="text-[10px] font-bold uppercase tracking-[.18em] text-blue-700">Transparent workflow</p><h2 class="mt-3 text-3xl font-bold tracking-tight text-[#102743]">How It Works</h2></div>
+                    <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">01</span><p class="mt-3 text-xs font-bold text-slate-900">Synchronize complaint records</p><p class="mt-2 text-[10px] leading-4 text-slate-500">Bring permitted bureau data into one view.</p></div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">02</span><p class="mt-3 text-xs font-bold text-slate-900">Match institution identities</p><p class="mt-2 text-[10px] leading-4 text-slate-500">Resolve records against Permanent IDs.</p></div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">03</span><p class="mt-3 text-xs font-bold text-slate-900">Detect potential relationships</p><p class="mt-2 text-[10px] leading-4 text-slate-500">AI surfaces likely related cross-bureau cases.</p></div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">04</span><p class="mt-3 text-xs font-bold text-slate-900">Review and verify connections</p><p class="mt-2 text-[10px] leading-4 text-slate-500">Officers decide whether a suggestion is relevant.</p></div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">05</span><p class="mt-3 text-xs font-bold text-slate-900">Coordinate actions</p><p class="mt-2 text-[10px] leading-4 text-slate-500">Collaborate across bureaus on linked cases.</p></div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-4"><span class="text-xs font-black text-blue-700">06</span><p class="mt-3 text-xs font-bold text-slate-900">Monitor and generate insights</p><p class="mt-2 text-[10px] leading-4 text-slate-500">Track progress, deadlines, and trends.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+                <div class="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:items-center">
+                    <div><p class="text-[10px] font-bold uppercase tracking-[.18em] text-blue-700">Platform preview</p><h2 class="mt-3 text-3xl font-bold tracking-tight text-[#102743]">Institution 360° at a glance</h2><p class="mt-4 text-sm leading-6 text-slate-600">Search by institution or Permanent ID, review complaints from different bureaus, and follow linked actions in one monitoring workspace.</p><button onclick="showPlatform('directory')" class="mt-6 rounded-lg border border-blue-200 bg-white px-4 py-2.5 text-xs font-bold text-blue-800 transition hover:bg-blue-50">Open Institution Directory →</button></div>
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl shadow-slate-900/5">
+                        <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3"><div><p class="text-xs font-bold text-slate-900">Institution 360° · PID-1001</p><p class="mt-1 text-[9px] text-slate-500">ABC Engineering College · Fictional demo record</p></div><span class="rounded bg-emerald-50 px-2 py-1 text-[9px] font-bold text-emerald-700">2 BUREAUS LINKED</span></div>
+                        <div class="grid sm:grid-cols-[1fr_1.15fr]">
+                            <div class="border-b border-slate-100 p-4 sm:border-b-0 sm:border-r"><label class="text-[9px] font-bold uppercase tracking-wide text-slate-500" for="demo-pid-search">Institution search / Permanent ID</label><input id="demo-pid-search" class="mt-2 w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-xs" value="PID-1001 · ABC Engineering College" readonly><div class="mt-4 flex gap-2"><span class="rounded-full bg-blue-50 px-2.5 py-1 text-[9px] font-semibold text-blue-700">Laboratory</span><span class="rounded-full bg-slate-100 px-2.5 py-1 text-[9px] font-semibold text-slate-600">Under process</span></div><div class="mt-4 space-y-2"><div class="flex justify-between rounded-lg border border-slate-100 p-2.5"><span class="text-[10px] font-bold">PGRC-101</span><span class="text-[9px] text-blue-700">PGRC · Related</span></div><div class="flex justify-between rounded-lg border border-slate-100 p-2.5"><span class="text-[10px] font-bold">RB-205</span><span class="text-[9px] text-teal-700">RB · Related</span></div></div><p class="mt-4 text-[9px] text-slate-500">Officer coordination · 2 actions tracked · Next due 28 Oct</p></div>
+                            <div class="p-4"><div class="flex items-center justify-between"><p class="text-[10px] font-bold text-slate-700">Complaint trend · demo</p><span class="text-[9px] text-slate-400">4 weeks</span></div><div class="mt-5 flex h-24 items-end gap-3 border-b border-l border-slate-200 px-3"><span class="h-[28%] flex-1 rounded-t bg-blue-200"></span><span class="h-[48%] flex-1 rounded-t bg-blue-300"></span><span class="h-[57%] flex-1 rounded-t bg-blue-400"></span><span class="h-[82%] flex-1 rounded-t bg-blue-700"></span></div><div class="mt-2 flex justify-between text-[8px] text-slate-400"><span>Wk 1</span><span>Wk 2</span><span>Wk 3</span><span>Wk 4</span></div><div class="mt-4 rounded-lg bg-amber-50 p-3"><p class="text-[9px] font-bold text-amber-900">Pending actions &amp; deadlines</p><p class="mt-1 text-[9px] text-amber-800">Collect lab records · Due 28 Oct<br>Review equipment list · Due 30 Oct</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="analytics" class="bg-[#f6f9fc] py-14">
+                <div class="mx-auto max-w-7xl px-5 lg:px-8"><div class="text-center"><p class="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[10px] font-bold text-amber-800">Illustrative Demo Data</p><h2 class="mt-3 text-2xl font-bold text-[#102743]">A unified view for better follow-through</h2></div><div class="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4"><div class="rounded-xl border border-slate-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-blue-800">120</p><p class="mt-1 text-[10px] text-slate-500">Institutions Monitored</p></div><div class="rounded-xl border border-slate-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-blue-800">2,450</p><p class="mt-1 text-[10px] text-slate-500">Complaint Records</p></div><div class="rounded-xl border border-slate-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-blue-800">86</p><p class="mt-1 text-[10px] text-slate-500">Potential Relationships</p></div><div class="rounded-xl border border-slate-200 bg-white p-5 text-center"><p class="text-2xl font-bold text-blue-800">340</p><p class="mt-1 text-[10px] text-slate-500">Actions Tracked</p></div></div><p class="mt-4 text-center text-[10px] text-slate-500">Fictional sample values for presentation only; not AICTE statistics or measured project outcomes.</p></div>
+            </section>
+
+            <section class="bg-navy-900 px-5 py-16 text-center text-white">
+                <p class="text-[10px] font-bold uppercase tracking-[.18em] text-cyan-300">Connected insight. Accountable action.</p><h2 class="mx-auto mt-3 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">See Every Connection. Coordinate Every Action.</h2><p class="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-300">Explore a unified approach to institutional complaint intelligence, transparent coordination, and accountable follow-up.</p><button onclick="showPlatform('overview')" class="mt-7 rounded-lg bg-white px-5 py-3 text-xs font-bold text-navy-900 shadow transition hover:-translate-y-0.5 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-navy-900">Explore Institution 360° →</button>
+            </section>
+        </main>
+        <footer class="bg-[#08182c] px-5 py-8 text-slate-300">
+            <div class="mx-auto grid max-w-7xl gap-7 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] lg:px-8"><div><p class="font-bold text-white">Institution 360°</p><p class="mt-2 max-w-sm text-[10px] leading-5 text-slate-400">An institutional complaint intelligence prototype exploring connected records, explainable relationships, and cross-bureau coordination.</p></div><div><p class="text-[10px] font-bold uppercase tracking-wider text-white">Platform</p><div class="mt-3 flex flex-col gap-2 text-[10px]"><a class="hover:text-white" href="#institutions">Overview &amp; Features</a><button onclick="showPlatform('overview')" class="text-left hover:text-white">Dashboard Demo</button><button onclick="showPlatform('review-queue')" class="text-left hover:text-white">Complaint Intelligence</button><button onclick="showPlatform('chat')" class="text-left hover:text-white">Coordination Workspace</button></div></div><div><p class="text-[10px] font-bold uppercase tracking-wider text-white">Prototype notice</p><p class="mt-3 text-[10px] leading-5 text-slate-400">Student-developed prototype for Smart India Hackathon. Not an official AICTE service unless formally authorized. All displayed records and metrics are fictional demonstration data.</p></div></div>
+        </footer>
+    </div>
+
+    <div id="platform-app" class="hidden">
+    <!-- TOP GLOBAL HEADER -->
+    <header class="bg-navy-900 text-white border-b border-navy-700 sticky top-0 z-50">
+        <div class="px-4 py-2.5 flex items-center justify-between">
+            <!-- Brand Logo & Title -->
+            <a href="#home" onclick="showLanding(); return false;" aria-label="Return to Institution 360 landing page" class="flex items-center space-x-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-700 text-[11px] font-extrabold tracking-tight text-white shadow-sm">360<span class="text-cyan-300">°</span></span>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                        Institution 360°
+                    </h1>
+                    <p class="text-xs text-slate-300">Centralized Complaint & Inter-Bureau Intelligence Platform</p>
+                </div>
+            </a>
+
+            <!-- Header Center: Global Search & Live Status -->
+            <div class="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 h-4 w-4 text-slate-400"></i>
+                    <input type="text" id="globalSearch" placeholder="Search PID (e.g. PID-1001), Complaint, or Institution..." 
+                        class="w-full bg-navy-800 text-slate-100 text-xs rounded-lg pl-9 pr-4 py-2 border border-slate-700 focus:outline-none focus:border-blue-400 transition"
+                        onkeyup="handleGlobalSearch(event)">
+                </div>
+            </div>
+
+            <!-- Right Controls: Role Switcher, System Clock & Profile -->
+            <div class="flex items-center space-x-4">
+                <!-- Role Switcher Dropdown (Mandatory SIH Test Capability) -->
+                <div class="flex items-center bg-navy-800 rounded-lg p-1 border border-slate-700">
+                    <span class="text-xs text-slate-400 px-2 font-medium hidden sm:inline">Role:</span>
+                    <select id="roleSwitcher" onchange="switchRole(this.value)" class="bg-navy-900 text-white text-xs font-semibold rounded px-2 py-1 focus:outline-none border-none cursor-pointer">
+                        <option value="Admin">Admin (Full Access)</option>
+                        <option value="Officer">Bureau Officer (PGRC/RB)</option>
+                    </select>
+                </div>
+
+                <!-- Notifications Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleNotificationPanel()" class="relative p-2 text-slate-300 hover:text-white hover:bg-navy-800 rounded-lg transition">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                        <span id="notifBadge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
+                    </button>
+                    <!-- Notification Panel Container -->
+                    <div id="notifDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white text-slate-800 rounded-lg shadow-xl border border-slate-200 z-50 text-xs">
+                        <div class="p-3 border-b border-slate-100 flex justify-between items-center font-semibold bg-slate-50">
+                            <span>System Notifications</span>
+                            <span class="text-xs text-blue-600 cursor-pointer" onclick="clearNotifs()">Mark all read</span>
+                        </div>
+                        <div id="notifList" class="max-h-64 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Avatar -->
+                <div class="flex items-center space-x-2 pl-2 border-l border-slate-700">
+                    <div class="w-8 h-8 rounded-full bg-slate-700 text-white font-bold flex items-center justify-center text-xs" id="userAvatar">
+                        AD
+                    </div>
+                    <div class="hidden lg:block text-left text-xs">
+                        <p class="font-semibold text-slate-200" id="userNameDisplay">Dr. R. Sharma</p>
+                        <p class="text-slate-400 text-[10px]" id="userRoleBadge">System Administrator</p>
+                    </div>
+                </div>
+                <button onclick="logoutDemo()" class="rounded-md border border-slate-600 px-3 py-1.5 text-[10px] font-semibold text-slate-200 transition hover:bg-navy-800 focus:outline-none focus:ring-2 focus:ring-blue-400">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN BODY LAYOUT -->
+    <div class="flex flex-1 overflow-hidden">
+
+        <!-- SIDEBAR NAVIGATION -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 z-40">
+            <div class="p-3 space-y-1 overflow-y-auto custom-scrollbar">
+                <div class="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Main Navigation</div>
+                
+                <button onclick="switchTab('overview')" id="nav-overview" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-semibold rounded-lg bg-blue-50 text-blue-700 hover:bg-slate-100 transition">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Overview Dashboard</span>
+                </button>
+
+                <button onclick="switchTab('directory')" id="nav-directory" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <span>Institution Directory & 360°</span>
+                </button>
+
+                <button onclick="switchTab('complaints')" id="nav-complaints" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Central Complaint Registry</span>
+                    <span id="badgeComplaintCount" class="ml-auto bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded text-[10px] font-bold">4</span>
+                </button>
+
+                <div class="pt-3 px-3 py-1 text-[11px] font-bold text-slate-400 uppercase tracking-wider">AI Intelligence</div>
+
+                <button onclick="switchTab('ai-detection')" id="nav-ai-detection" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="cpu" class="w-4 h-4 text-purple-600"></i>
+                    <span>AI Relationship Engine</span>
+                </button>
+
+                <button onclick="switchTab('review-queue')" id="nav-review-queue" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="git-pull-request" class="w-4 h-4 text-amber-600"></i>
+                    <span>Relationship Review Queue</span>
+                    <span id="badgePendingReviews" class="ml-auto bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[10px] font-bold">1 Pending</span>
+                </button>
+
+                <div class="pt-3 px-3 py-1 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Inter-Bureau Collaboration</div>
+
+                <button onclick="switchTab('chat')" id="nav-chat" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Cross-Bureau Chat</span>
+                    <span class="ml-auto bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-[10px] font-bold">Live</span>
+                </button>
+
+                <button onclick="switchTab('action-tracker')" id="nav-action-tracker" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="check-square" class="w-4 h-4 text-blue-600"></i>
+                    <span>Action Tracker</span>
+                </button>
+
+                <button onclick="switchTab('notifications')" id="nav-notifications" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="clock" class="w-4 h-4 text-red-500"></i>
+                    <span>Deadlines & Reminders</span>
+                </button>
+
+                <div class="pt-3 px-3 py-1 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Analytics & Admin</div>
+
+                <button onclick="switchTab('reports')" id="nav-reports" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                    <span>Reports & Analytics</span>
+                </button>
+
+                <button onclick="switchTab('audit')" id="nav-audit" class="w-full flex items-center space-x-3 px-3 py-2.5 text-xs font-medium text-slate-600 rounded-lg hover:bg-slate-100 transition admin-only">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>Audit Log & System API</span>
+                </button>
+            </div>
+
+            <!-- Bottom Sync Trigger -->
+            <div class="p-3 border-t border-slate-200 bg-slate-50">
+                <button onclick="triggerMockSync()" class="w-full flex items-center justify-center space-x-2 bg-navy-800 hover:bg-navy-900 text-white text-xs font-medium py-2 rounded-lg transition shadow">
+                    <i data-lucide="refresh-cw" id="syncSpinner" class="w-3.5 h-3.5"></i>
+                    <span>Sync Complaints API</span>
+                </button>
+                <p class="text-[10px] text-slate-400 text-center mt-1">PGRC & RB Mock Systems Active</p>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEW CONTAINER -->
+        <main class="flex-1 bg-slate-50 overflow-y-auto p-4 md:p-6 custom-scrollbar" id="mainContainer">
+
+            <!-- TAB 1: OVERVIEW DASHBOARD -->
+            <div id="tab-overview" class="tab-content space-y-6">
+                <!-- Page Banner -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">AICTE Executive Overview Dashboard</h2>
+                        <p class="text-xs text-slate-500">Real-time inter-bureau complaint monitoring, AI relationship detection, and institution risk index.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                            <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> PGRC Sync: OK
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                            <span class="w-2 h-2 mr-1.5 bg-emerald-500 rounded-full animate-pulse"></span> RB Sync: OK
+                        </span>
+                    </div>
+                </div>
+
+                <!-- KPI Metric Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-slate-500">Total Registered Complaints</span>
+                            <div class="p-2 bg-blue-50 text-blue-600 rounded-lg"><i data-lucide="file-text" class="w-4 h-4"></i></div>
+                        </div>
+                        <div class="mt-2 flex items-baseline justify-between">
+                            <span class="text-2xl font-bold text-slate-800" id="kpiTotalComplaints">4</span>
+                            <span class="text-xs text-emerald-600 font-medium">100% Ingested</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-slate-500">Flagged AI Relationships</span>
+                            <div class="p-2 bg-purple-50 text-purple-600 rounded-lg"><i data-lucide="cpu" class="w-4 h-4"></i></div>
+                        </div>
+                        <div class="mt-2 flex items-baseline justify-between">
+                            <span class="text-2xl font-bold text-purple-700" id="kpiAiRelationships">1</span>
+                            <span class="text-xs text-amber-600 font-medium">1 Review Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-slate-500">Active Cross-Bureau Chats</span>
+                            <div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg"><i data-lucide="message-square" class="w-4 h-4"></i></div>
+                        </div>
+                        <div class="mt-2 flex items-baseline justify-between">
+                            <span class="text-2xl font-bold text-emerald-700" id="kpiActiveChats">1</span>
+                            <span class="text-xs text-slate-500">PGRC & RB Linked</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold text-slate-500">Overdue Actions / SLA</span>
+                            <div class="p-2 bg-red-50 text-red-600 rounded-lg"><i data-lucide="alert-triangle" class="w-4 h-4"></i></div>
+                        </div>
+                        <div class="mt-2 flex items-baseline justify-between">
+                            <span class="text-2xl font-bold text-red-600" id="kpiOverdueActions">1</span>
+                            <span class="text-xs text-red-600 font-medium">Action Required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Chart 1: Bureau Breakdown -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Complaints Ingested by Bureau</h3>
+                            <span class="text-xs text-slate-400">PGRC vs Regional Bureau (RB)</span>
+                        </div>
+                        <div class="h-60 relative">
+                            <canvas id="bureauChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Institution Complaint Severity Graph -->
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Institution Risk Distribution</h3>
+                            <button onclick="switchTab('directory')" class="text-xs text-blue-600 hover:underline font-medium">View Directory &rarr;</button>
+                        </div>
+                        <div class="h-60 relative">
+                            <canvas id="institutionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High Priority Cross-Bureau Case Spotlight (SIH Demo Focus) -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="p-1.5 bg-amber-100 text-amber-800 rounded-md"><i data-lucide="alert-circle" class="w-4 h-4"></i></span>
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-800">High-Priority Inter-Bureau Match Flagged</h3>
+                                <p class="text-xs text-slate-500">Multiple complaints registered for same Institution Permanent ID: PID-1001</p>
+                            </div>
+                        </div>
+                        <button onclick="switchTab('review-queue')" class="bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:bg-blue-700 transition font-medium">
+                            Review AI Match &rarr;
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <!-- PGRC Record -->
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <div class="flex justify-between font-semibold text-slate-700">
+                                <span>PGRC Record: PGRC-101</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px]">PGRC Bureau</span>
+                            </div>
+                            <p class="mt-1 text-slate-600">"Students report insufficient laboratory equipment and limited access to practical sessions."</p>
+                            <div class="mt-2 text-[11px] text-slate-400">Inst: ABC Engineering College (PID-1001)</div>
+                        </div>
+                        <!-- RB Record -->
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <div class="flex justify-between font-semibold text-slate-700">
+                                <span>RB Record: RB-205</span>
+                                <span class="bg-teal-100 text-teal-800 px-2 py-0.5 rounded text-[10px]">Regional Bureau</span>
+                            </div>
+                            <p class="mt-1 text-slate-600">"The institution may have inadequate laboratory infrastructure and equipment for required practical training."</p>
+                            <div class="mt-2 text-[11px] text-slate-400">Inst: ABC Engineering College (PID-1001)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: INSTITUTION DIRECTORY & 360 PROFILE -->
+            <div id="tab-directory" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">AICTE Institution Directory</h2>
+                        <p class="text-xs text-slate-500">Central database matched by AICTE Permanent ID (PID)</p>
+                    </div>
+                    <input type="text" id="instSearchInput" onkeyup="filterInstitutions()" placeholder="Filter by PID or Name..." class="text-xs bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 w-64 focus:outline-none focus:border-blue-500">
+                </div>
+
+                <!-- Directory Grid / Table -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3">Permanent ID</th>
+                                <th class="p-3">Institution Name</th>
+                                <th class="p-3">Location</th>
+                                <th class="p-3">Type</th>
+                                <th class="p-3 text-center">Total Complaints</th>
+                                <th class="p-3 text-center">Active Relationships</th>
+                                <th class="p-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="institutionTableBody" class="divide-y divide-slate-100">
+                            <!-- Dynamically loaded -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 360 Profile Modal / Drawer -->
+                <div id="institutionProfileModal" class="hidden bg-white rounded-xl border border-slate-200 p-6 shadow-lg space-y-6">
+                    <div class="flex justify-between items-start border-b border-slate-200 pb-4">
+                        <div>
+                            <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded" id="drawerPid">PID-1001</span>
+                            <h3 class="text-lg font-bold text-slate-800 mt-1" id="drawerName">ABC Engineering College</h3>
+                            <p class="text-xs text-slate-500" id="drawerLocation">New Delhi, Delhi | Engg & Tech</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="generateAiSummary()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs px-3 py-1.5 rounded-lg font-semibold flex items-center space-x-1 shadow">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                                <span>Generate AI 360° Summary</span>
+                            </button>
+                            <button onclick="closeProfileDrawer()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- AI Generated Summary Box -->
+                    <div id="aiSummaryBox" class="hidden bg-purple-50 border border-purple-200 rounded-lg p-4 text-xs space-y-2">
+                        <div class="flex items-center space-x-2 text-purple-900 font-bold">
+                            <i data-lucide="bot" class="w-4 h-4 text-purple-700"></i>
+                            <span>AICTE Automated Intelligence Summary</span>
+                            <span class="text-[10px] bg-purple-200 text-purple-800 px-2 py-0.5 rounded font-normal">Generated Real-Time</span>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed" id="aiSummaryContent">Analysing database records...</p>
+                    </div>
+
+                    <!-- Profile Tabs: Complaints vs Graph vs Actions -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Linked Complaints List -->
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Ingested Complaints</h4>
+                            <div id="drawerComplaintsList" class="space-y-2 text-xs">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+
+                        <!-- Mini Graph Preview -->
+                        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Bureau Inter-Connection Topology</h4>
+                            <div class="my-4 h-36 bg-white border border-slate-200 rounded flex items-center justify-center relative overflow-hidden" id="miniGraphCanvas">
+                                <!-- Interactive SVG rendered dynamically -->
+                            </div>
+                            <button onclick="switchTab('ai-detection')" class="text-xs text-blue-600 hover:underline text-center font-medium">Open Interactive Graph Studio &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: CENTRAL COMPLAINT REGISTRY -->
+            <div id="tab-complaints" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl border border-slate-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Central Complaint Registry</h2>
+                        <p class="text-xs text-slate-500">Normalized records ingested from PGRC and Regional Bureau systems.</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <select id="bureauFilter" onchange="renderComplaintsTable()" class="text-xs bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 focus:outline-none">
+                            <option value="ALL">All Bureaus</option>
+                            <option value="PGRC">PGRC Bureau</option>
+                            <option value="RB">Regional Bureau</option>
+                        </select>
+                        <button onclick="triggerMockSync()" class="bg-navy-800 hover:bg-navy-900 text-white text-xs px-3 py-1.5 rounded-lg flex items-center space-x-1 font-medium">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                            <span>Sync Mock APIs</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Complaints Data Table -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">Bureau</th>
+                                <th class="p-3">Institution PID & Name</th>
+                                <th class="p-3">Complaint Text</th>
+                                <th class="p-3">Category</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody" class="divide-y divide-slate-100">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: AI RELATIONSHIP DETECTION & GRAPH STUDIO -->
+            <div id="tab-ai-detection" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">AI Complaint Relationship Engine</h2>
+                        <p class="text-xs text-slate-500">Semantic text embeddings & metadata matching across different Bureaus</p>
+                    </div>
+                    <button onclick="runAiDetection()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs px-4 py-2 rounded-lg font-bold flex items-center space-x-2 shadow">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Run Semantic AI Scan</span>
+                    </button>
+                </div>
+
+                <!-- Graph Canvas & Details Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Graph Canvas (React Flow / Network Style Visualizer) -->
+                    <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col h-[450px]">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Inter-Bureau Relationship Topology</h3>
+                            <span class="text-[10px] text-slate-400">Nodes = Complaints/Institutions | Edges = AI Similarity</span>
+                        </div>
+                        <div id="interactiveGraphView" class="flex-1 bg-slate-900 rounded-lg border border-slate-800 relative overflow-hidden flex items-center justify-center">
+                            <!-- SVG Interactive Node Network Container -->
+                        </div>
+                    </div>
+
+                    <!-- Relationship Explanation Panel -->
+                    <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">AI Model Explainability Matrix</h3>
+                            <div id="aiExplainPanel" class="space-y-3 text-xs">
+                                <div class="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                                    <div class="flex justify-between font-bold text-purple-900">
+                                        <span>PGRC-101 &harr; RB-205</span>
+                                        <span class="text-purple-700">92% Match</span>
+                                    </div>
+                                    <p class="text-slate-600 text-[11px] mt-1">Identical Permanent ID: <strong>PID-1001</strong></p>
+                                    <div class="mt-2 space-y-1">
+                                        <div class="text-[10px] text-slate-500 font-semibold">Matched Keywords / Semantics:</div>
+                                        <div class="flex flex-wrap gap-1">
+                                            <span class="bg-purple-200 text-purple-800 px-1.5 py-0.5 rounded text-[10px]">laboratory equipment</span>
+                                            <span class="bg-purple-200 text-purple-800 px-1.5 py-0.5 rounded text-[10px]">practical sessions</span>
+                                            <span class="bg-purple-200 text-purple-800 px-1.5 py-0.5 rounded text-[10px]">infrastructure</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                    <div class="flex justify-between font-bold text-slate-700">
+                                        <span>PGRC-110 (Scholarship)</span>
+                                        <span class="text-slate-500">18% Match</span>
+                                    </div>
+                                    <p class="text-slate-500 text-[11px] mt-1">Same Institution PID, but semantic category is Financial/Scholarship. Not automatically linked to lab complaints.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="switchTab('review-queue')" class="w-full bg-navy-800 hover:bg-navy-900 text-white text-xs py-2 rounded-lg font-semibold transition">
+                            Go to Officer Review Queue &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: RELATIONSHIP REVIEW QUEUE -->
+            <div id="tab-review-queue" class="tab-content hidden space-y-6">
+                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                    <h2 class="text-xl font-bold text-slate-800">Officer Relationship Review Queue</h2>
+                    <p class="text-xs text-slate-500">Human-in-the-loop verification required before initiating cross-Bureau coordination</p>
+                </div>
+
+                <!-- Review Cards -->
+                <div id="reviewCardsContainer" class="space-y-4">
+                    <!-- Dynamic review items -->
+                </div>
+            </div>
+
+            <!-- TAB 6: CROSS-BUREAU COORDINATION CHAT -->
+            <div id="tab-chat" class="tab-content hidden h-[calc(100vh-140px)] flex bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <!-- Chat Sidebar: Channels/Conversations -->
+                <div class="w-1/3 border-r border-slate-200 bg-slate-50 flex flex-col">
+                    <div class="p-3 border-b border-slate-200 font-bold text-slate-700 text-xs uppercase tracking-wider">
+                        Confirmed Inter-Bureau Channels
+                    </div>
+                    <div class="flex-1 overflow-y-auto divide-y divide-slate-100" id="chatChannelList">
+                        <!-- Dynamic list -->
+                    </div>
+                </div>
+
+                <!-- Chat Main Window -->
+                <div class="flex-1 flex flex-col bg-white">
+                    <!-- Chat Header -->
+                    <div class="p-3 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+                        <div>
+                            <h3 class="text-xs font-bold text-slate-800" id="chatTitle">Case #CH-PID1001: Lab Infrastructure Coordination</h3>
+                            <p class="text-[10px] text-slate-500" id="chatSubtitle">Participants: PGRC Officer A, Regional Bureau Officer B</p>
+                        </div>
+                        <button onclick="openCreateActionModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-2.5 py-1.5 rounded-lg font-medium flex items-center space-x-1">
+                            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                            <span>Assign Action Item</span>
+                        </button>
+                    </div>
+
+                    <!-- Chat Messages Stream -->
+                    <div class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar" id="chatMessagesContainer">
+                        <!-- Messages dynamically populated -->
+                    </div>
+
+                    <!-- Chat Input Box -->
+                    <div class="p-3 border-t border-slate-200 bg-slate-50 flex items-center space-x-2">
+                        <input type="text" id="chatInput" onkeypress="handleChatKeyPress(event)" placeholder="Type cross-Bureau message or update..." class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-blue-500">
+                        <button onclick="sendChatMessage()" class="bg-navy-800 hover:bg-navy-900 text-white text-xs px-4 py-2 rounded-lg font-semibold flex items-center space-x-1">
+                            <span>Send</span>
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 7: ACTION TRACKER -->
+            <div id="tab-action-tracker" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Inter-Bureau Action Tracker</h2>
+                        <p class="text-xs text-slate-500">Assign follow-up tasks, inspect laboratory compliance, and enforce SLAs</p>
+                    </div>
+                    <button onclick="openCreateActionModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-2 rounded-lg font-bold flex items-center space-x-1">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>New Action Item</span>
+                    </button>
+                </div>
+
+                <!-- Action Items Table -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3">Action ID</th>
+                                <th class="p-3">Title & Description</th>
+                                <th class="p-3">Assigned Bureau & Officer</th>
+                                <th class="p-3">Due Date</th>
+                                <th class="p-3">Priority</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3 text-right">Update Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="actionTableBody" class="divide-y divide-slate-100">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 8: DEADLINES & NOTIFICATION CENTER -->
+            <div id="tab-notifications" class="tab-content hidden space-y-6">
+                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                    <h2 class="text-xl font-bold text-slate-800">Deadlines & SLA Monitor</h2>
+                    <p class="text-xs text-slate-500">Automated reminder system for pending inter-bureau verifications</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <h3 class="text-xs font-bold text-red-600 uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="alert-octagon" class="w-4 h-4"></i> Overdue SLAs
+                        </h3>
+                        <div id="overdueList" class="space-y-2 text-xs">
+                            <!-- Injected -->
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <h3 class="text-xs font-bold text-amber-600 uppercase tracking-wider flex items-center gap-1">
+                            <i data-lucide="clock" class="w-4 h-4"></i> Approaching Deadlines (Next 48 Hours)
+                        </h3>
+                        <div id="approachingList" class="space-y-2 text-xs">
+                            <!-- Injected -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 9: REPORTS & ANALYTICS -->
+            <div id="tab-reports" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Reports & Analytics Engine</h2>
+                        <p class="text-xs text-slate-500">Generate executive reports and export audit-ready datasets.</p>
+                    </div>
+                    <button onclick="exportCsvReport()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold flex items-center space-x-1 shadow">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export CSV Report</span>
+                    </button>
+                </div>
+
+                <!-- Report Summary Stats -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200 text-xs space-y-4">
+                    <h3 class="font-bold text-slate-700 uppercase tracking-wider">Complaint Trend Analysis</h3>
+                    <div class="h-64 relative">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 10: AUDIT LOG & SETTINGS -->
+            <div id="tab-audit" class="tab-content hidden space-y-6">
+                <div class="bg-white p-4 rounded-xl border border-slate-200">
+                    <h2 class="text-xl font-bold text-slate-800">Immutable System Audit Log</h2>
+                    <p class="text-xs text-slate-500">Append-only log recording logins, AI relationship verifications, and cross-bureau actions.</p>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3">Timestamp</th>
+                                <th class="p-3">Actor / Role</th>
+                                <th class="p-3">Event Type</th>
+                                <th class="p-3">Details & Metadata</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditTableBody" class="divide-y divide-slate-100">
+                            <!-- Injected -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ACTION ITEM CREATION MODAL -->
+    <div id="actionModal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-xl border border-slate-200 w-full max-w-md p-6 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="text-sm font-bold text-slate-800">Assign Cross-Bureau Action</h3>
+                <button onclick="closeActionModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Action Title</label>
+                    <input type="text" id="actionTitleInput" placeholder="e.g. Inspect Lab Compliance Documents" class="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Assigned Bureau & Officer</label>
+                    <select id="actionAssigneeInput" class="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-blue-500">
+                        <option value="PGRC Officer A">PGRC Officer A (Grievance)</option>
+                        <option value="RB Officer B">Regional Bureau Officer B (Compliance)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Due Date</label>
+                    <input type="date" id="actionDueDateInput" class="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+            <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
+                <button onclick="closeActionModal()" class="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded font-medium">Cancel</button>
+                <button onclick="saveNewAction()" class="px-3 py-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded font-bold">Assign Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC (REACT-LIKE STATE REPLICATOR IN VANILLA JS) -->
+    <script>
+        // ==========================================
+        // SYSTEM STATE & SEED DATA (PERMANENT DB STORE)
+        // ==========================================
+        const state = {
+            currentUser: {
+                role: 'Admin',
+                name: 'Dr. R. Sharma',
+                avatar: 'AD'
+            },
+            institutions: [
+                { pid: 'PID-1001', name: 'ABC Engineering College', state: 'Delhi', city: 'New Delhi', type: 'Engineering & Tech', totalComplaints: 3, riskScore: 'High' },
+                { pid: 'PID-1002', name: 'Delhi Institute of Tech', state: 'Delhi', city: 'Delhi', type: 'Polytechnic', totalComplaints: 1, riskScore: 'Low' },
+                { pid: 'PID-1003', name: 'National Tech Academy', state: 'Maharashtra', city: 'Mumbai', type: 'Management & Engg', totalComplaints: 0, riskScore: 'None' }
+            ],
+            complaints: [
+                {
+                    id: 'PGRC-101',
+                    bureau: 'PGRC',
+                    pid: 'PID-1001',
+                    instName: 'ABC Engineering College',
+                    text: 'Students report insufficient laboratory equipment and limited access to practical sessions.',
+                    category: 'Infrastructure & Labs',
+                    status: 'Under Review',
+                    priority: 'High',
+                    date: '2026-10-20'
+                },
+                {
+                    id: 'RB-205',
+                    bureau: 'RB',
+                    pid: 'PID-1001',
+                    instName: 'ABC Engineering College',
+                    text: 'The institution may have inadequate laboratory infrastructure and equipment for required practical training.',
+                    category: 'Regulatory Compliance',
+                    status: 'Under Review',
+                    priority: 'High',
+                    date: '2026-10-22'
+                },
+                {
+                    id: 'PGRC-110',
+                    bureau: 'PGRC',
+                    pid: 'PID-1001',
+                    instName: 'ABC Engineering College',
+                    text: 'Students report delays in scholarship payments and fee disbursement.',
+                    category: 'Scholarship / Financial',
+                    status: 'Pending',
+                    priority: 'Medium',
+                    date: '2026-10-24'
+                },
+                {
+                    id: 'RB-302',
+                    bureau: 'RB',
+                    pid: 'PID-1002',
+                    instName: 'Delhi Institute of Tech',
+                    text: 'Faculty ratio check requested regarding assistant professors.',
+                    category: 'Faculty Ratio',
+                    status: 'Resolved',
+                    priority: 'Low',
+                    date: '2026-10-15'
+                }
+            ],
+            relationships: [
+                {
+                    id: 'REL-001',
+                    c1: 'PGRC-101',
+                    c2: 'RB-205',
+                    pid: 'PID-1001',
+                    score: 92,
+                    explanation: 'Identical Permanent ID (PID-1001) + High semantic similarity on laboratory equipment and infrastructure deficiencies across PGRC and Regional Bureau.',
+                    status: 'PENDING', // PENDING, CONFIRMED, REJECTED
+                    confirmedBy: null
+                }
+            ],
+            chats: [
+                {
+                    channelId: 'CH-PID1001',
+                    title: 'Case #PID-1001: Lab Infrastructure',
+                    messages: [
+                        { sender: 'PGRC Officer A', role: 'PGRC', text: 'Initiating cross-bureau channel for PID-1001. We received student complaints on missing lab equipment.', time: '10:15 AM' },
+                        { sender: 'RB Officer B', role: 'RB', text: 'Acknowledged. Regional Bureau has flagged them for physical audit next month.', time: '10:20 AM' }
+                    ]
+                }
+            ],
+            actions: [
+                { id: 'ACT-101', title: 'Collect student grievance logs', assignee: 'PGRC Officer A', dueDate: '2026-10-28', status: 'In Progress', priority: 'High' },
+                { id: 'ACT-102', title: 'Review laboratory compliance docs', assignee: 'RB Officer B', dueDate: '2026-10-25', status: 'Overdue', priority: 'High' }
+            ],
+            notifications: [
+                { id: 1, text: 'AI Flagged high match between PGRC-101 & RB-205', read: false, type: 'alert' },
+                { id: 2, text: 'Action item ACT-102 is Overdue for RB Officer B', read: false, type: 'warning' }
+            ],
+            auditLog: [
+                { timestamp: '2026-10-26 18:30:00', actor: 'System Auto-Ingest', type: 'MOCK_API_SYNC', details: 'Ingested 4 records from PGRC & RB endpoints.' },
+                { timestamp: '2026-10-26 18:32:15', actor: 'AI Engine (Sentence-Transformers)', type: 'RELATIONSHIP_FLAGGED', details: 'Flagged REL-001 (PGRC-101 <-> RB-205) with 92% similarity.' }
+            ]
+        };
+
+        // Charts Global Ref
+        let bureauChartObj = null;
+        let institutionChartObj = null;
+        let trendChartObj = null;
+
+        // ==========================================
+        // INITIALIZATION ON LOAD
+        // ==========================================
+        window.onload = function() {
+            lucide.createIcons();
+            renderAll();
+            initCharts();
+            renderInteractiveGraph();
+        };
+
+        function renderAll() {
+            updateKpis();
+            renderComplaintsTable();
+            renderInstitutionTable();
+            renderReviewQueue();
+            renderChatMessages();
+            renderActionTable();
+            renderNotifications();
+            renderAuditTable();
+        }
+
+        // ==========================================
+        // ROLE SWITCHING LOGIC
+        // ==========================================
+        function switchRole(newRole) {
+            if (newRole !== 'Admin' && newRole !== 'Officer') {
+                console.error(`Cannot switch to unknown demo role: ${newRole}`);
+                return;
+            }
+            state.currentUser.role = newRole;
+            if (newRole === 'Admin') {
+                state.currentUser.name = 'Dr. R. Sharma';
+                state.currentUser.avatar = 'AD';
+            } else if (newRole === 'Officer') {
+                state.currentUser.name = 'PGRC Officer A';
+                state.currentUser.avatar = 'OF';
+            }
+
+            document.getElementById('userNameDisplay').innerText = state.currentUser.name;
+            document.getElementById('userRoleBadge').innerText = newRole === 'Admin' ? 'System Administrator' : 'Bureau Officer';
+            document.getElementById('userAvatar').innerText = state.currentUser.avatar;
+
+            // Restrict admin tabs
+            const adminElements = document.querySelectorAll('.admin-only');
+            adminElements.forEach(el => {
+                if (newRole !== 'Admin') el.classList.add('hidden');
+                else el.classList.remove('hidden');
+            });
+
+            logAudit(state.currentUser.name, 'ROLE_SWITCH', `User switched role to ${newRole}`);
+            renderAll();
+        }
+
+        // ==========================================
+        // NAVIGATION TAB SWITCHING
+        // ==========================================
+        function showPlatform(tabId) {
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (!targetTab) {
+                console.error(`Cannot open unknown platform module: ${tabId}`);
+                return;
+            }
+
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('platform-app').classList.remove('hidden');
+            switchTab(tabId);
+            if (bureauChartObj) bureauChartObj.resize();
+            if (institutionChartObj) institutionChartObj.resize();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showLanding() {
+            document.getElementById('platform-app').classList.add('hidden');
+            document.getElementById('landing-page').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function logoutDemo() {
+            showLanding();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Update nav button styles
+            const navButtons = document.querySelectorAll('#sidebar button');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-blue-700', 'font-semibold');
+                btn.classList.add('text-slate-600', 'font-medium');
+            });
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-blue-50', 'text-blue-700', 'font-semibold');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            // Trigger chart redraws if needed
+            if (tabId === 'overview') updateCharts();
+            if (tabId === 'reports') renderTrendChart();
+            if (tabId === 'ai-detection') renderInteractiveGraph();
+        }
+
+        // ==========================================
+        // MOCK API SYNCHRONIZATION
+        // ==========================================
+        function triggerMockSync() {
+            const spinner = document.getElementById('syncSpinner');
+            spinner.classList.add('animate-spin');
+
+            setTimeout(() => {
+                spinner.classList.remove('animate-spin');
+                logAudit(state.currentUser.name, 'MOCK_API_SYNC', 'Synchronized endpoints PGRC-v1 & RB-v2. 0 new duplicates found.');
+                addNotification('Mock API Ingestion Complete: All records up-to-date.', 'info');
+                alert('Mock API Synchronization Successful!\nIngested: 4 total complaints\nDuplicates Handled: 0\nInstitutions Matched: 3');
+            }, 800);
+        }
+
+        // ==========================================
+        // KPI & DASHBOARD UPDATES
+        // ==========================================
+        function updateKpis() {
+            document.getElementById('kpiTotalComplaints').innerText = state.complaints.length;
+            document.getElementById('kpiAiRelationships').innerText = state.relationships.length;
+            document.getElementById('kpiActiveChats').innerText = state.chats.length;
+            
+            const overdue = state.actions.filter(a => a.status === 'Overdue').length;
+            document.getElementById('kpiOverdueActions').innerText = overdue;
+
+            document.getElementById('badgeComplaintCount').innerText = state.complaints.length;
+            
+            const pendingReviews = state.relationships.filter(r => r.status === 'PENDING').length;
+            document.getElementById('badgePendingReviews').innerText = `${pendingReviews} Pending`;
+        }
+
+        // ==========================================
+        // TABLE RENDERING FUNCTIONS
+        // ==========================================
+        function renderComplaintsTable() {
+            const tbody = document.getElementById('complaintsTableBody');
+            const bureauFilter = document.getElementById('bureauFilter') ? document.getElementById('bureauFilter').value : 'ALL';
+            
+            let filtered = state.complaints;
+            if (bureauFilter !== 'ALL') {
+                filtered = filtered.filter(c => c.bureau === bureauFilter);
+            }
+
+            tbody.innerHTML = filtered.map(c => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-3 font-bold text-slate-800">${c.id}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${c.bureau === 'PGRC' ? 'bg-blue-100 text-blue-800' : 'bg-teal-100 text-teal-800'}">
+                            ${c.bureau}
+                        </span>
+                    </td>
+                    <td class="p-3">
+                        <div class="font-semibold text-slate-800">${c.instName}</div>
+                        <div class="text-[10px] text-slate-400">${c.pid}</div>
+                    </td>
+                    <td class="p-3 max-w-xs truncate text-slate-600">${c.text}</td>
+                    <td class="p-3 text-slate-500">${c.category}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${c.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${c.status}
+                        </span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="openInstitutionProfile('${c.pid}')" class="text-blue-600 hover:underline font-medium text-[11px]">View 360° Profile</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderInstitutionTable() {
+            const tbody = document.getElementById('institutionTableBody');
+            tbody.innerHTML = state.institutions.map(inst => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-3 font-bold text-blue-600">${inst.pid}</td>
+                    <td class="p-3 font-semibold text-slate-800">${inst.name}</td>
+                    <td class="p-3 text-slate-500">${inst.city}, ${inst.state}</td>
+                    <td class="p-3 text-slate-500">${inst.type}</td>
+                    <td class="p-3 text-center font-bold text-slate-800">${inst.totalComplaints}</td>
+                    <td class="p-3 text-center">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${inst.riskScore === 'High' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}">
+                            ${inst.riskScore} Risk
+                        </span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="openInstitutionProfile('${inst.pid}')" class="bg-navy-800 hover:bg-navy-900 text-white px-2.5 py-1 rounded text-[11px] font-medium transition">
+                            Open 360° Drawer
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Filter directory table
+        function filterInstitutions() {
+            const query = document.getElementById('instSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#institutionTableBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // ==========================================
+        // INSTITUTION 360° DRAWER & AI SUMMARY
+        // ==========================================
+        function openInstitutionProfile(pid) {
+            const inst = state.institutions.find(i => i.pid === pid);
+            if (!inst) return;
+
+            document.getElementById('drawerPid').innerText = inst.pid;
+            document.getElementById('drawerName').innerText = inst.name;
+            document.getElementById('drawerLocation').innerText = `${inst.city}, ${inst.state} | ${inst.type}`;
+
+            // List complaints for this institution
+            const instComplaints = state.complaints.filter(c => c.pid === pid);
+            const listContainer = document.getElementById('drawerComplaintsList');
+            if (instComplaints.length === 0) {
+                listContainer.innerHTML = `<p class="text-slate-400 italic">No complaints registered for this institution.</p>`;
+            } else {
+                listContainer.innerHTML = instComplaints.map(c => `
+                    <div class="p-2 bg-white rounded border border-slate-200">
+                        <div class="flex justify-between font-bold text-slate-700">
+                            <span>${c.id} (${c.bureau})</span>
+                            <span class="text-[10px] text-slate-400">${c.date}</span>
+                        </div>
+                        <p class="text-slate-600 mt-1">${c.text}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Render Mini Graph inside Drawer
+            renderMiniGraph(pid);
+
+            document.getElementById('institutionProfileModal').classList.remove('hidden');
+            switchTab('directory');
+        }
+
+        function closeProfileDrawer() {
+            document.getElementById('institutionProfileModal').classList.add('hidden');
+        }
+
+        function generateAiSummary() {
+            const box = document.getElementById('aiSummaryBox');
+            const content = document.getElementById('aiSummaryContent');
+            box.classList.remove('hidden');
+            content.innerText = "Analyzing database metrics...";
+
+            setTimeout(() => {
+                content.innerHTML = `
+                    <strong>Executive Risk Rating: HIGH.</strong> ABC Engineering College (PID-1001) has accumulated 3 total complaints across PGRC (2) and Regional Bureau (1). 
+                    AI Semantic Engine detected a 92% cross-Bureau pattern link between <em>PGRC-101</em> and <em>RB-205</em> regarding missing laboratory equipment and practical training infrastructure.
+                    Immediate joint inter-bureau compliance review is recommended.
+                `;
+                logAudit(state.currentUser.name, 'AI_SUMMARY_GEN', 'Generated AI 360 Summary for PID-1001.');
+            }, 600);
+        }
+
+        // ==========================================
+        // AI RELATIONSHIP SCAN & REVIEW QUEUE
+        // ==========================================
+        function runAiDetection() {
+            alert("AI Semantic Scan Complete!\nEvaluated 6 complaint pairs using Sentence-Transformers model.\nFound 1 High Confidence match (>90%).");
+            logAudit(state.currentUser.name, 'AI_SCAN_EXEC', 'Executed AI semantic relationship scan across PGRC and RB datasets.');
+            switchTab('ai-detection');
+        }
+
+        function renderReviewQueue() {
+            const container = document.getElementById('reviewCardsContainer');
+            const pending = state.relationships;
+
+            if (pending.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 text-xs">No pending relationship suggestions.</p>`;
+                return;
+            }
+
+            container.innerHTML = pending.map(rel => `
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full">AI Match: ${rel.score}% Similarity</span>
+                            <span class="text-xs text-slate-400">Institution: <strong>${rel.pid}</strong></span>
+                        </div>
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded ${rel.status === 'CONFIRMED' ? 'bg-emerald-100 text-emerald-800' : (rel.status === 'REJECTED' ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800')}">
+                            Status: ${rel.status}
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <div class="font-bold text-blue-700">${rel.c1} (PGRC Bureau)</div>
+                            <p class="text-slate-600 mt-1">"${state.complaints.find(c => c.id === rel.c1)?.text}"</p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                            <div class="font-bold text-teal-700">${rel.c2} (Regional Bureau)</div>
+                            <p class="text-slate-600 mt-1">"${state.complaints.find(c => c.id === rel.c2)?.text}"</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-3 rounded-lg text-xs text-purple-900">
+                        <strong>AI Explanation Evidence:</strong> ${rel.explanation}
+                    </div>
+
+                    ${rel.status === 'PENDING' ? `
+                    <div class="flex justify-end space-x-3 pt-2">
+                        <button onclick="handleReviewDecision('${rel.id}', 'REJECTED')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
+                            Reject Relationship
+                        </button>
+                        <button onclick="handleReviewDecision('${rel.id}', 'CONFIRMED')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow transition flex items-center gap-1">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i> Confirm & Open Chat Channel
+                        </button>
+                    </div>
+                    ` : `<p class="text-xs text-slate-400 text-right">Decision recorded by ${rel.confirmedBy}</p>`}
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function handleReviewDecision(relId, decision) {
+            const rel = state.relationships.find(r => r.id === relId);
+            if (!rel) return;
+
+            rel.status = decision;
+            rel.confirmedBy = state.currentUser.name;
+
+            logAudit(state.currentUser.name, 'RELATIONSHIP_REVIEW', `Officer set relationship ${relId} status to ${decision}`);
+            
+            if (decision === 'CONFIRMED') {
+                addNotification(`Relationship ${relId} Confirmed! Inter-bureau chat channel initialized.`, 'success');
+                alert(`Relationship Confirmed!\nPGRC-101 and RB-205 are now linked. Cross-Bureau chat channel is active.`);
+            } else {
+                addNotification(`Relationship ${relId} Rejected by officer.`, 'info');
+            }
+
+            renderAll();
+        }
+
+        // ==========================================
+        // CROSS-BUREAU CHAT SYSTEM
+        // ==========================================
+        function renderChatMessages() {
+            const channel = state.chats[0];
+            const listContainer = document.getElementById('chatChannelList');
+            
+            listContainer.innerHTML = `
+                <div class="p-3 bg-blue-50 border-l-4 border-blue-600 cursor-pointer">
+                    <div class="font-bold text-xs text-slate-800">${channel.title}</div>
+                    <div class="text-[10px] text-slate-500 truncate mt-0.5">${channel.messages[channel.messages.length - 1]?.text || 'No messages'}</div>
+                </div>
+            `;
+
+            const container = document.getElementById('chatMessagesContainer');
+            container.innerHTML = channel.messages.map(m => {
+                const isMe = m.sender === state.currentUser.name;
+                return `
+                    <div class="flex ${isMe ? 'justify-end' : 'justify-start'}">
+                        <div class="max-w-xs md:max-w-md ${isMe ? 'bg-navy-800 text-white' : 'bg-slate-100 text-slate-800'} p-3 rounded-xl text-xs space-y-1">
+                            <div class="flex items-center justify-between space-x-2 text-[10px] ${isMe ? 'text-slate-300' : 'text-slate-500'}">
+                                <span class="font-bold">${m.sender}</span>
+                                <span>${m.time}</span>
+                            </div>
+                            <p>${m.text}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            state.chats[0].messages.push({
+                sender: state.currentUser.name,
+                role: state.currentUser.role,
+                text: text,
+                time: timeNow
+            });
+
+            input.value = '';
+            logAudit(state.currentUser.name, 'CHAT_MESSAGE_SENT', `Sent chat message in channel ${state.chats[0].channelId}`);
+            renderChatMessages();
+        }
+
+        function handleChatKeyPress(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        // ==========================================
+        // ACTION TRACKER & MODAL
+        // ==========================================
+        function renderActionTable() {
+            const tbody = document.getElementById('actionTableBody');
+            tbody.innerHTML = state.actions.map(act => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-3 font-bold text-slate-800">${act.id}</td>
+                    <td class="p-3 font-semibold text-slate-800">${act.title}</td>
+                    <td class="p-3 text-slate-600">${act.assignee}</td>
+                    <td class="p-3 ${act.status === 'Overdue' ? 'text-red-600 font-bold' : 'text-slate-500'}">${act.dueDate}</td>
+                    <td class="p-3 font-semibold text-amber-700">${act.priority}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${act.status === 'Overdue' ? 'bg-red-100 text-red-800' : (act.status === 'Completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800')}">
+                            ${act.status}
+                        </span>
+                    </td>
+                    <td class="p-3 text-right">
+                        <button onclick="toggleActionStatus('${act.id}')" class="text-blue-600 hover:underline text-[11px] font-medium">Toggle Complete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openCreateActionModal() {
+            document.getElementById('actionModal').classList.remove('hidden');
+        }
+
+        function closeActionModal() {
+            document.getElementById('actionModal').classList.add('hidden');
+        }
+
+        function saveNewAction() {
+            const title = document.getElementById('actionTitleInput').value.trim();
+            const assignee = document.getElementById('actionAssigneeInput').value;
+            const dueDate = document.getElementById('actionDueDateInput').value;
+
+            if (!title || !dueDate) {
+                alert('Please enter an action title and due date.');
+                return;
+            }
+
+            const newAct = {
+                id: `ACT-${Math.floor(100 + Math.random() * 900)}`,
+                title: title,
+                assignee: assignee,
+                dueDate: dueDate,
+                status: 'In Progress',
+                priority: 'High'
+            };
+
+            state.actions.push(newAct);
+            logAudit(state.currentUser.name, 'ACTION_CREATED', `Assigned task ${newAct.id} to ${assignee}`);
+            addNotification(`New Action ${newAct.id} assigned to ${assignee}`, 'info');
+
+            closeActionModal();
+            renderAll();
+        }
+
+        function toggleActionStatus(actId) {
+            const act = state.actions.find(a => a.id === actId);
+            if (!act) return;
+
+            act.status = act.status === 'Completed' ? 'In Progress' : 'Completed';
+            logAudit(state.currentUser.name, 'ACTION_STATUS_CHANGE', `Changed ${actId} status to ${act.status}`);
+            renderAll();
+        }
+
+        // ==========================================
+        // NOTIFICATIONS & DEADLINES
+        // ==========================================
+        function renderNotifications() {
+            const notifList = document.getElementById('notifList');
+            notifList.innerHTML = state.notifications.map(n => `
+                <div class="p-3 hover:bg-slate-50 transition flex items-start space-x-2">
+                    <span class="w-2 h-2 mt-1.5 rounded-full ${n.type === 'alert' ? 'bg-red-500' : 'bg-blue-500'}"></span>
+                    <p class="text-slate-700">${n.text}</p>
+                </div>
+            `).join('');
+
+            // Also render Deadline tab items
+            const overdueList = document.getElementById('overdueList');
+            const overdueActions = state.actions.filter(a => a.status === 'Overdue');
+            overdueList.innerHTML = overdueActions.map(a => `
+                <div class="p-3 bg-red-50 rounded-lg border border-red-200 flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-red-900">${a.id}: ${a.title}</div>
+                        <div class="text-[10px] text-red-700">Assigned: ${a.assignee} | Due: ${a.dueDate}</div>
+                    </div>
+                    <button onclick="toggleActionStatus('${a.id}')" class="bg-red-600 text-white px-2 py-1 rounded text-[10px] font-bold">Mark Done</button>
+                </div>
+            `).join('');
+
+            const approachingList = document.getElementById('approachingList');
+            const inProgressActions = state.actions.filter(a => a.status === 'In Progress');
+            approachingList.innerHTML = inProgressActions.map(a => `
+                <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 flex justify-between items-center">
+                    <div>
+                        <div class="font-bold text-amber-900">${a.id}: ${a.title}</div>
+                        <div class="text-[10px] text-amber-700">Assigned: ${a.assignee} | Due: ${a.dueDate}</div>
+                    </div>
+                    <span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded font-bold">Pending</span>
+                </div>
+            `).join('');
+        }
+
+        function addNotification(text, type) {
+            state.notifications.unshift({ id: Date.now(), text: text, read: false, type: type });
+            renderNotifications();
+        }
+
+        function toggleNotificationPanel() {
+            document.getElementById('notifDropdown').classList.toggle('hidden');
+        }
+
+        function clearNotifs() {
+            state.notifications = [];
+            renderNotifications();
+        }
+
+        // ==========================================
+        // AUDIT LOGGING & EXPORTS
+        // ==========================================
+        function logAudit(actor, eventType, details) {
+            const timeNow = new Date().toISOString().replace('T', ' ').substring(0, 19);
+            state.auditLog.unshift({ timestamp: timeNow, actor: actor, type: eventType, details: details });
+            renderAuditTable();
+        }
+
+        function renderAuditTable() {
+            const tbody = document.getElementById('auditTableBody');
+            tbody.innerHTML = state.auditLog.map(a => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-3 font-mono text-slate-500 text-[11px]">${a.timestamp}</td>
+                    <td class="p-3 font-bold text-slate-700">${a.actor}</td>
+                    <td class="p-3"><span class="bg-slate-100 text-slate-800 px-2 py-0.5 rounded text-[10px] font-bold">${a.type}</span></td>
+                    <td class="p-3 text-slate-600">${a.details}</td>
+                </tr>
+            `).join('');
+        }
+
+        function exportCsvReport() {
+            let csvContent = "data:text/csv;charset=utf-8,Complaint_ID,Bureau,PID,Institution_Name,Status,Category\n";
+            state.complaints.forEach(c => {
+                csvContent += `${c.id},${c.bureau},${c.pid},"${c.instName}",${c.status},"${c.category}"\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "AICTE_Complaints_Report_360.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            logAudit(state.currentUser.name, 'EXPORT_CSV', 'Downloaded CSV summary report.');
+        }
+
+        // ==========================================
+        // GRAPHICAL VISUALIZERS (SVG INTERACTIVE ENGINE)
+        // ==========================================
+        function renderInteractiveGraph() {
+            const container = document.getElementById('interactiveGraphView');
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 600 350" class="w-full h-full">
+                    <!-- Edge Connections -->
+                    <line x1="300" y1="175" x2="150" y2="100" stroke="#ff6b00" stroke-width="3" stroke-dasharray="5,5" />
+                    <line x1="300" y1="175" x2="450" y2="100" stroke="#00a896" stroke-width="3" stroke-dasharray="5,5" />
+                    <line x1="150" y1="100" x2="450" y2="100" stroke="#a855f7" stroke-width="4" />
+                    
+                    <!-- Edge Label -->
+                    <rect x="250" y="85" width="100" height="24" rx="4" fill="#581c87" />
+                    <text x="300" y="101" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">92% AI Similarity</text>
+
+                    <!-- Institution Center Node -->
+                    <g transform="translate(300, 175)" class="cursor-pointer" onclick="openInstitutionProfile('PID-1001')">
+                        <circle r="40" fill="#0f2942" stroke="#3b82f6" stroke-width="3" />
+                        <text x="0" y="-5" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">PID-1001</text>
+                        <text x="0" y="12" fill="#94a3b8" font-size="9" text-anchor="middle">ABC Engg College</text>
+                    </g>
+
+                    <!-- Complaint Node 1 (PGRC) -->
+                    <g transform="translate(150, 100)" class="cursor-pointer">
+                        <circle r="30" fill="#1d4ed8" stroke="#60a5fa" stroke-width="2" />
+                        <text x="0" y="-3" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">PGRC-101</text>
+                        <text x="0" y="10" fill="#bfdbfe" font-size="8" text-anchor="middle">Lab Deficit</text>
+                    </g>
+
+                    <!-- Complaint Node 2 (RB) -->
+                    <g transform="translate(450, 100)" class="cursor-pointer">
+                        <circle r="30" fill="#0f766e" stroke="#2dd4bf" stroke-width="2" />
+                        <text x="0" y="-3" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">RB-205</text>
+                        <text x="0" y="10" fill="#99f6e4" font-size="8" text-anchor="middle">Infrastructure</text>
+                    </g>
+
+                    <!-- Complaint Node 3 (Unlinked Scholarship) -->
+                    <g transform="translate(300, 290)" class="cursor-pointer">
+                        <line x1="300" y1="175" x2="300" y2="290" stroke="#475569" stroke-width="1.5" />
+                        <circle r="25" fill="#334155" stroke="#94a3b8" stroke-width="2" />
+                        <text x="0" y="-2" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">PGRC-110</text>
+                        <text x="0" y="9" fill="#cbd5e1" font-size="7" text-anchor="middle">Scholarship</text>
+                    </g>
+                </svg>
+            `;
+        }
+
+        function renderMiniGraph(pid) {
+            const canvas = document.getElementById('miniGraphCanvas');
+            canvas.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 300 120">
+                    <line x1="150" y1="60" x2="70" y2="60" stroke="#2563eb" stroke-width="2" />
+                    <line x1="150" y1="60" x2="230" y2="60" stroke="#0d9488" stroke-width="2" />
+                    <circle cx="150" cy="60" r="22" fill="#0f2942" />
+                    <text x="150" y="64" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">${pid}</text>
+                    <circle cx="70" cy="60" r="16" fill="#2563eb" />
+                    <text x="70" y="63" fill="#fff" font-size="8" text-anchor="middle">PGRC</text>
+                    <circle cx="230" cy="60" r="16" fill="#0d9488" />
+                    <text x="230" y="63" fill="#fff" font-size="8" text-anchor="middle">RB</text>
+                </svg>
+            `;
+        }
+
+        // ==========================================
+        // CHART.JS INITIALIZATION
+        // ==========================================
+        function initCharts() {
+            // Chart 1: Bureau Breakdown
+            const ctx1 = document.getElementById('bureauChart').getContext('2d');
+            bureauChartObj = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['PGRC Bureau', 'Regional Bureau (RB)'],
+                    datasets: [{
+                        data: [2, 2],
+                        backgroundColor: ['#1d4ed8', '#0f766e']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // Chart 2: Institution Distribution
+            const ctx2 = document.getElementById('institutionChart').getContext('2d');
+            institutionChartObj = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['ABC Engg (PID-1001)', 'Delhi Tech (PID-1002)', 'National Tech (PID-1003)'],
+                    datasets: [{
+                        label: 'Active Complaints',
+                        data: [3, 1, 0],
+                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function updateCharts() {
+            if (bureauChartObj) bureauChartObj.update();
+            if (institutionChartObj) institutionChartObj.update();
+        }
+
+        function renderTrendChart() {
+            const ctx3 = document.getElementById('trendChart').getContext('2d');
+            if (trendChartObj) trendChartObj.destroy();
+            trendChartObj = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4 (Current)'],
+                    datasets: [
+                        { label: 'Ingested Complaints', data: [1, 2, 2, 4], borderColor: '#2563eb', tension: 0.3 },
+                        { label: 'AI Flagged Matches', data: [0, 0, 1, 1], borderColor: '#9333ea', tension: 0.3 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Search bar handler
+        function handleGlobalSearch(e) {
+            const query = e.target.value.toLowerCase();
+            if (e.key === 'Enter' && query) {
+                switchTab('directory');
+                document.getElementById('instSearchInput').value = query;
+                filterInstitutions();
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>
